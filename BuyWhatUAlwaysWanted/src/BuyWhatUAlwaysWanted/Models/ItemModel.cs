@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-
 namespace BuyWhatUAlwaysWanted.Models
 {
-    public class User
+    public class ItemModel
     {
         public long Id { get; set; }
 
@@ -27,7 +26,7 @@ namespace BuyWhatUAlwaysWanted.Models
             set { _key = value; }
         }
 
-        [Display(Name = "Post Title")]
+        [Display(Name = "Item Title")]
         [Required]
         [DataType(DataType.Text)]
         [StringLength(100, MinimumLength = 5,
@@ -42,6 +41,5 @@ namespace BuyWhatUAlwaysWanted.Models
         public string Body { get; set; }
 
         public DateTime Posted { get; set; }
-    
     }
 }

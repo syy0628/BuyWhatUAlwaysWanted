@@ -4,9 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using BuyWhatUAlwaysWanted.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace BuyWhatUAlwaysWanted
 {
@@ -35,8 +39,22 @@ namespace BuyWhatUAlwaysWanted
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
+            services.AddDbContext<ItemDataContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("ItemDataContext");
+                options.UseSqlServer(connectionString);
+            });
 
+            services.AddDbContext<IdentityDataContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("IdentityDataContext");
+                options.UseSqlServer(connectionString);
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDataContext>();
             services.AddMvc();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,12 +79,16 @@ namespace BuyWhatUAlwaysWanted
 
             app.UseStaticFiles();
 
+            app.UseIdentity();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedData.Initialize(app.ApplicationServices);
         }
     }
 }

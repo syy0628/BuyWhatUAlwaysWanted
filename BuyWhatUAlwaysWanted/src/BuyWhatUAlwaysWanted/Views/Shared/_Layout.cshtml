@@ -40,10 +40,28 @@
             <div class="span8">
                 <div class="account pull-right">
                     <ul class="user-menu">
+                    @if (User.Identity.IsAuthenticated)
+                    {
                         <li><a href="#">My Account</a></li>
                         <li><a href="cart.html">Your Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
-                        <li><a asp-area="" asp-controller="User" asp-action="Login">Login</a></li>
+                        <li><form id="logout" action="@Url.Action("Logout", "Account")" method="POST">
+                            <a href="javascript: $('#logout').submit()" class="last">
+                                Logout
+                                <br /><span class="tagline">@User.Identity.Name</span>
+                            </a>
+                        </form>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="cart.html">Your Cart</a></li>
+                        <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="@Url.Action("Login", "Account")" title="log in" class="last">Login</a></li>
+                    }
+             
                     </ul>
                 </div>
             </div>
