@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ExploreCalifornia.Models
+namespace BuyWhatUAlwaysWanted.Models
 {
     public class IdentityDataContext : IdentityDbContext<IdentityUser>
     {

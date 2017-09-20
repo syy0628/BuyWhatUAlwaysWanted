@@ -42,9 +42,10 @@
                     <ul class="user-menu">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a href="#">My Account</a></li>
+                        
                         <li><a href="cart.html">Your Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="#">My Account</a></li>
                         <li><form id="logout" action="@Url.Action("Logout", "Account")" method="POST">
                             <a href="javascript: $('#logout').submit()" class="last">
                                 Logout
@@ -56,9 +57,10 @@
                     }
                     else
                     {
-                        <li><a href="#">My Account</a></li>
+                        
                         <li><a href="cart.html">Your Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
+                        <li><a href="@Url.Action("Register", "Account")" title="Register" class="last">Register</a></li>
                         <li><a href="@Url.Action("Login", "Account")" title="log in" class="last">Login</a></li>
                     }
              
