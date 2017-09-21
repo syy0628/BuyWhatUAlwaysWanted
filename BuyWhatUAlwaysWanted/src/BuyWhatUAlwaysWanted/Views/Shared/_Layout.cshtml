@@ -33,8 +33,9 @@
     <div id="top-bar" class="container">
         <div class="row">
             <div class="span4">
+                <a href="@Url.Action("Index", "Home")" class="logo pull-left"><img src="~/images/logo.png" class="site_logo" alt=""></a>
                 <form method="POST" class="search_form">
-                    <input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
+                    <input type="text" class="input-block-level search-query" Placeholder="Serach here">
                 </form>
             </div>
             <div class="span8">
@@ -45,11 +46,11 @@
                         
                         <li><a href="cart.html">Your Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="#">My Account</a></li>
+                        <li><a href="#"><span class="tagline">@User.Identity.Name</span></a></li>
                         <li><form id="logout" action="@Url.Action("Logout", "Account")" method="POST">
                             <a href="javascript: $('#logout').submit()" class="last">
                                 Logout
-                                <br /><span class="tagline">@User.Identity.Name</span>
+                                
                             </a>
                         </form>
                         </li>
@@ -69,6 +70,8 @@
             </div>
         </div>
     </div>
+
+    @RenderBody()
 </body>
-@RenderBody()
+
 </html>

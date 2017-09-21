@@ -13,11 +13,11 @@ namespace BuyWhatUAlwaysWanted.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult ItemDetail()
         {
             ViewData["Message"] = "Your application description page.";
 
-            return View();
+            return View("itemDetail");
         }
 
         public IActionResult Contact()
